@@ -1,0 +1,2 @@
+class KomasController < ApplicationController
+end

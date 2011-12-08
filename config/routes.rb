@@ -1,4 +1,12 @@
 Manga4koma::Application.routes.draw do
+  resources :pictures
+
+  resources :komas
+
+  resources :mangas
+
+  devise_for :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

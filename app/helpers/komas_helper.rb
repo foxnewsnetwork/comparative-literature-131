@@ -1,0 +1,2 @@
+module KomasHelper
+end
