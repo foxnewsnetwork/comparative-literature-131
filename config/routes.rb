@@ -1,4 +1,6 @@
 Manga4koma::Application.routes.draw do
+  resources :chapters
+
   resources :pictures
 
   resources :komas
