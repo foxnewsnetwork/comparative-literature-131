@@ -10,8 +10,7 @@
 #  updated_at   :datetime
 #
 
-require 'spec_helper'
-
-describe Layers do
-  pending "add some examples to (or delete) #{__FILE__}"
+class Layer < ActiveRecord::Base
+	belongs_to :picture, :class_name => "Picture"
+	belongs_to :koma, :class_name => "Koma"
 end
