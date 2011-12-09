@@ -1,4 +1,14 @@
 Manga4koma::Application.routes.draw do
+  get "pages/home"
+
+  get "pages/about"
+
+  get "pages/help"
+
+  get "pages/contact"
+
+  get "pages/developer"
+
   resources :chapters
 
   resources :pictures

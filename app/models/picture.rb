@@ -1,4 +1,4 @@
 class Picture < ActiveRecord::Base
-	belongs_to :koma
+	has_many :koma, :through => :layers
 	belongs_to :user
 end
