@@ -1,0 +1,9 @@
+<h1>Manga Index</h1>
+<%= will_paginate %>
+<ul>
+	<%= @mangas.each do |manga| %>
+		<li><%= manga.id %></li>
+	<% end %>
+</ul>
+<%= will_paginate %>
+
