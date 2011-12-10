@@ -1,13 +1,8 @@
 Manga4koma::Application.routes.draw do
-  get "pages/home"
-
-  get "pages/about"
-
-  get "pages/help"
-
-  get "pages/contact"
-
-  get "pages/developer"
+  match "/about", :to => "pages#about"
+  match "/help", :to => "pages#help"
+  match "/contact", :to => "pages#contact"
+  match "/developer", :to => "pages#developer"
 
   resources :chapters
 
