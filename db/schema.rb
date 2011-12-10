@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111209223821) do
+ActiveRecord::Schema.define(:version => 20111209233130) do
 
   create_table "chapters", :force => true do |t|
     t.integer  "manga_id"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(:version => 20111209223821) do
     t.datetime "updated_at"
   end
 
+  add_index "chapters", ["chapter_number"], :name => "index_chapters_on_chapter_number"
+  add_index "chapters", ["manga_id"], :name => "index_chapters_on_manga_id"
+
   create_table "collaborations", :force => true do |t|
     t.integer  "manga_id"
     t.string   "rank"
@@ -31,11 +34,17 @@ ActiveRecord::Schema.define(:version => 20111209223821) do
     t.integer  "collaborator_id"
   end
 
+  add_index "collaborations", ["collaborator_id", "manga_id"], :name => "index_collaborations_on_collaborator_id_and_manga_id", :unique => true
+  add_index "collaborations", ["collaborator_id"], :name => "index_collaborations_on_collaborator_id"
+  add_index "collaborations", ["manga_id"], :name => "index_collaborations_on_manga_id"
+
   create_table "komas", :force => true do |t|
     t.integer  "chapter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "komas", ["chapter_id"], :name => "index_komas_on_chapter_id"
 
   create_table "layers", :force => true do |t|
     t.integer  "koma_id"
@@ -45,6 +54,10 @@ ActiveRecord::Schema.define(:version => 20111209223821) do
     t.datetime "updated_at"
   end
 
+  add_index "layers", ["koma_id", "picture_id"], :name => "index_layers_on_koma_id_and_picture_id", :unique => true
+  add_index "layers", ["koma_id"], :name => "index_layers_on_koma_id"
+  add_index "layers", ["picture_id"], :name => "index_layers_on_picture_id"
+
   create_table "mangas", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
@@ -53,13 +66,21 @@ ActiveRecord::Schema.define(:version => 20111209223821) do
     t.datetime "updated_at"
   end
 
+  add_index "mangas", ["user_id"], :name => "index_mangas_on_user_id"
+
   create_table "pictures", :force => true do |t|
     t.integer  "user_id"
     t.string   "usage"
     t.string   "extension"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "pic_file_name"
+    t.string   "pic_content_type"
+    t.integer  "pic_file_size"
+    t.datetime "pic_updated_at"
   end
+
+  add_index "pictures", ["user_id"], :name => "index_pictures_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
