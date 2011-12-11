@@ -1,0 +1,19 @@
+<% if @is_correct_user %>
+	<h1>My Dashboard</h1>
+	<p>Displays the manga you're involved with</p>
+	<p>Displays the manga you're following</p>
+	<p>Displays a simple personalized feed</p>
+	<h1>My Image Collection</h1>
+	<p>UI for uploading picture</p>
+	<p>UI for folders for characters, places, and objects</p>
+	<% form_for @picture, :html => { :multipart => true } do |f| %>
+		<%= f.file_field :pic %>
+		<%= f.submit :submit %>
+	<% end %>
+	<% @existing_pics.each do |pic| %>
+		<%= image_tag(pic.pic.url, :alt => "picture", :title => "current photo") %>
+	<% end %>
+<% end %>
+<h1>My Profile</h1>
+<p>Your public profile</p>
+

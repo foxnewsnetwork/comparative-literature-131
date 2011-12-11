@@ -5,7 +5,7 @@
 		<li><%= link_to "Manga List", mangas_path %></li>
 		<li><%= link_to "Showcase", "#" %></li>
 		<% if user_signed_in? %>
-			<li><%= link_to "My Dashboard", current_user_path %></li>
+			<li><%= link_to "My Dashboard", current_user %></li>
 			<li><%= link_to "Logout", destroy_user_session_path, :method => :delete %>
 		<% else %>
 			<li><%= link_to "Sign in", new_user_session_path %></li>

@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.11'
 gem 'will_paginate', '~> 3.0.0'
+gem "rmagick", "~> 2.13.1"
 gem "paperclip", "~> 2.4"
 
 group :development do

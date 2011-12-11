@@ -20,9 +20,8 @@ class Picture < ActiveRecord::Base
 	belongs_to :user
 	
 	# Paperclip usage
-	has_attached_file :pic, :style => { :small => "150x150>" , :thumb => "100x100#"},
-																							:path => ":rails_root/public/:class/:attachment/:user_id/:id_:usage_:basename.:extension" 
+	has_attached_file :pic, :style => { :small => "150x150>" , :thumb => "100x100#"}
 	validates_attachment_presence :pic
-	validates_attachment_size :pic, :less_than => 5.megabytes
+	validates_attachment_size :pic, :less_than => 2.megabytes
 	validates_attachment_content_type :pic, :content_type => [ "image/png"]
 end
