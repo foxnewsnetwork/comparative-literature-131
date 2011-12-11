@@ -7,13 +7,17 @@ Manga4koma::Application.routes.draw do
   match "/contact", :to => "pages#contact"
   match "/developer", :to => "pages#developer"
 
-  resources :chapters
+  # resources :chapters
 
   resources :pictures
-
+	resources :chapters
   resources :komas
 
-  resources :mangas
+  resources :mangas do
+  	resources :chapters do
+  		resources :komas
+  	end
+  end
 
   devise_for :users
 

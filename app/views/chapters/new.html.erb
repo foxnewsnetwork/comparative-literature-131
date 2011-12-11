@@ -1,2 +1,10 @@
-<h1>Chapters#new</h1>
-<p>Find me in app/views/chapters/new.html.erb</p>
+<% if user_signed_in? %>
+	<h1><%= "New Chapter for #{@manga.title}" %></h1>
+	<% form_for( [@manga, @chapter], :html => { :multipart => true } ) do |f| %>
+		<%= f.label :title %>
+		<%= f.text_field :title %>
+		<%= f.submit :submit %>
+	<% end %>
+<% else %>
+	<p>You need to sign in order to create chapters</p>
+<% end %>

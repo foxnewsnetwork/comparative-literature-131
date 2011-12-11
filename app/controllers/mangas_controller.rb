@@ -1,6 +1,4 @@
 class MangasController < ApplicationController
-	before_filter :authenticate, :only => [ :create, :update, :edit]
-	before_filter :is_owner, :only => [ :destroy ]
 
 	# GET request
 	def index
@@ -10,17 +8,29 @@ class MangasController < ApplicationController
 	
 	# GET request
 	def new
-	
+		if user_signed_in?
+			@manga = current_user.mangas.new
+		else
+			
+		end
 	end
 	
 	# POST request
 	def create
-	
+		@manga = current_user.mangas.build( params[:manga] )
+		if @manga.save
+			flash[:success] = "Manga successfully created!"
+			redirect_to current_user
+		else
+			flash[:error] = "Failed to create manga..."
+			redirect_to root_path
+		end
 	end
 	
 	# GET request
 	def show
-	
+		@manga = Manga.find_by_id(params[:id])	
+		
 	end
 	
 	# PUT request

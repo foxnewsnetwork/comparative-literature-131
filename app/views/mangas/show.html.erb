@@ -1,2 +1,12 @@
-<h1>Mangas#show</h1>
-<p>Find me in app/views/mangas/show.html.erb</p>
+<h1><%= @manga.title %></h1>
+<p><%= @manga.summary %></p>
+<% if @manga.chapters.empty? %>
+	<p>Nothing here yet! You should consider making a new chapter !</p>
+<% else %>
+	<ul>
+		<% @manga.chapters.each do |chapter| %>
+			<li><%= "Chapter #{chapter.chapter_number}: #{chapter.chapter_title}" %></li>
+		<% end %>
+	</ul>
+<% end %>
+<%= link_to "Create New Chapter!", manga_path(@manga) + new_chapter_path %>

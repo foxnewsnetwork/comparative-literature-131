@@ -1,2 +1,15 @@
-<h1>Chapters#show</h1>
-<p>Find me in app/views/chapters/show.html.erb</p>
+<h1><%= @chapter.title %></h1>
+<p><%= "Chapter #{@chapter.chapter_number} of #{@manga.title}" %></p>
+<%= will_paginate @komas %>
+<% @komas.each do |koma| %>
+	<%= render koma %>
+<% end %>
+<%= will_paginate @komas %>
+<% if @correct_user %>
+	<%= link_to "Add Another Koma!", manga_path(@manga) + chapter_path(@chapter) + new_koma_path %>	
+<% else %>
+
+<% end %>
+
+
+

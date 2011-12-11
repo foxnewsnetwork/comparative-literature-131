@@ -13,6 +13,7 @@
 	<% @existing_pics.each do |pic| %>
 		<%= image_tag(pic.pic.url, :alt => "picture", :title => "current photo") %>
 	<% end %>
+	<%= link_to "Create Manga!", new_manga_path %>
 <% end %>
 <h1>My Profile</h1>
 <p>Your public profile</p>
