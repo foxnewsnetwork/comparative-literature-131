@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111209233130) do
+ActiveRecord::Schema.define(:version => 20111211224826) do
 
   create_table "chapters", :force => true do |t|
     t.integer  "manga_id"
@@ -49,9 +49,10 @@ ActiveRecord::Schema.define(:version => 20111209233130) do
   create_table "layers", :force => true do |t|
     t.integer  "koma_id"
     t.integer  "picture_id"
-    t.integer  "stack_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "layer_before"
+    t.integer  "layer_after"
   end
 
   add_index "layers", ["koma_id", "picture_id"], :name => "index_layers_on_koma_id_and_picture_id", :unique => true

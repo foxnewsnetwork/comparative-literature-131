@@ -5,7 +5,7 @@
 <% else %>
 	<ul>
 		<% @manga.chapters.each do |chapter| %>
-			<li><%= "Chapter #{chapter.chapter_number}: #{chapter.chapter_title}" %></li>
+			<li><%= link_to "Chapter #{chapter.chapter_number}: #{chapter.title}", manga_path(@manga) + chapter_path(chapter) %></li>
 		<% end %>
 	</ul>
 <% end %>

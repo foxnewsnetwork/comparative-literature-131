@@ -1,2 +1,32 @@
 <h1>Komas#show</h1>
-<p>Find me in app/views/komas/show.html.erb</p>
+<% if @correct_user %>
+	<% form_for @layer, :html => { :multipart => true } do |f| %>
+		<%= f.label "Insert New Layer:" %> 
+		<%= f.file_field :pic %>
+		<%= f.hidden_field :user_id, :value => current_user.id %>
+		<%= f.hidden_field :manga_id, :value => @manga.id %>
+		<%= f.hidden_field :chapter_id, :value => @chapter.id %>
+		<%= f.hidden_field :koma_id, :value => @koma.id %>
+		<%= f.submit :submit %>
+	<% end %>
+<% end %>
+<ul>
+<% @layers.each do |layer| %>
+	<li>
+		<%= image_tag layer.picture.pic.url %>
+		<% if @correct_user %>
+			<% form_for :layer, :html => { :multipart => true } do |f| %>
+				<%= f.label "Insert New Layer:" %>
+				<%= f.file_field :pic %>
+				<%= f.hidden_field :user_id, current_user.id %>
+				<%= f.hidden_field :manga_id, @manga.id %>
+				<%= f.hidden_field :chapter_id, @chapter.id %>
+				<%= f.hidden_field :koma_id, @koma.id %>
+				<%= f.submit :submit %>
+			<% end %>
+		<% end %>
+	</li>
+<% end %>
+</ul>
+
+

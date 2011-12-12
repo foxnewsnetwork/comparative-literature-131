@@ -12,10 +12,13 @@ Manga4koma::Application.routes.draw do
   resources :pictures
 	resources :chapters
   resources :komas
+  resources :layers, :only => [:create, :destroy, :update]
 
   resources :mangas do
   	resources :chapters do
-  		resources :komas
+  		resources :komas do
+  			resources :layers, :only => [:create, :destroy, :update]
+  		end
   	end
   end
 

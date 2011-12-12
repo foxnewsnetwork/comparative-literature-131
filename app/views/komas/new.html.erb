@@ -1,2 +1,10 @@
-<h1>Komas#new</h1>
-<p>Find me in app/views/komas/new.html.erb</p>
+<h1><%= link_to @manga.title, manga_path(@manga) %></h1>
+<h2><%= link_to @chapter.title, chapter_path(@chapter) %></h2>
+<% if @correct_user %>
+	<% form_for( [@manga, @chapter, @koma], :html => { :multipart => true } ) do | f | %>
+		<%= f.label "Nothing to do here..." %>
+		<%= f.submit :submit %>
+	<% end %>
+<% else %>
+	<p>You need to be signed in to make new additions to this chapter</p>
+<% end %>

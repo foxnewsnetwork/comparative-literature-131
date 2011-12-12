@@ -1,0 +1,9 @@
+<% unless pictures.count == 0 %>
+	<% picture = pictures.first %>
+	<div style="background-image: url(<%= picture.pic.url %>)">
+		<% unless pictures.count == 1 %>
+			<% remaining_pictures = pictures[1..count-1] %>
+			<%= render "pictures/recursion", :pictures => remaining_pictures %>
+		<% end %>
+	<div>
+<% end %>
