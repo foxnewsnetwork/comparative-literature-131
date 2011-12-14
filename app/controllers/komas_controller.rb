@@ -6,7 +6,7 @@ class KomasController < ApplicationController
 		@chapter = @manga.chapters.find_by_id(params[:chapter_id])
 		@koma = @chapter.komas.find_by_id(params[:id])
 		@layers = @koma.layers
-		@layer = @koma.layers.new
+
 		if user_signed_in?
 			@correct_user = @manga.collaborators.empty? ? false : @manga.collaborators.find_by_id(current_user.id).empty?
 			@correct_user = @manga.user.id == current_user.id

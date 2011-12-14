@@ -1,6 +1,6 @@
 Manga4koma::Application.routes.draw do
 
-	resources :users, :only => [:show, :index]
+
 	
   match "/about", :to => "pages#about"
   match "/help", :to => "pages#help"
@@ -12,18 +12,18 @@ Manga4koma::Application.routes.draw do
   resources :pictures
 	resources :chapters
   resources :komas
-  resources :layers, :only => [:create, :destroy, :update]
+  resources :layers
 
   resources :mangas do
   	resources :chapters do
   		resources :komas do
-  			resources :layers, :only => [:create, :destroy, :update]
+  			resources :layers
   		end
   	end
   end
 
-  devise_for :users
-
+	devise_for :users
+	resources :users, :only => [:show, :index]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

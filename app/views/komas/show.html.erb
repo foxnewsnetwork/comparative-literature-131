@@ -1,32 +1,21 @@
 <h1>Komas#show</h1>
-<% if @correct_user %>
-	<% form_for @layer, :html => { :multipart => true } do |f| %>
-		<%= f.label "Insert New Layer:" %> 
-		<%= f.file_field :pic %>
-		<%= f.hidden_field :user_id, :value => current_user.id %>
-		<%= f.hidden_field :manga_id, :value => @manga.id %>
-		<%= f.hidden_field :chapter_id, :value => @chapter.id %>
-		<%= f.hidden_field :koma_id, :value => @koma.id %>
-		<%= f.submit :submit %>
-	<% end %>
-<% end %>
 <ul>
-<% @layers.each do |layer| %>
+<% for k in 0..@layers.count-1 do %>
+<% layer = @layers[k] %>
 	<li>
-		<%= image_tag layer.picture.pic.url %>
 		<% if @correct_user %>
-			<% form_for :layer, :html => { :multipart => true } do |f| %>
-				<%= f.label "Insert New Layer:" %>
-				<%= f.file_field :pic %>
-				<%= f.hidden_field :user_id, current_user.id %>
-				<%= f.hidden_field :manga_id, @manga.id %>
-				<%= f.hidden_field :chapter_id, @chapter.id %>
-				<%= f.hidden_field :koma_id, @koma.id %>
-				<%= f.submit :submit %>
-			<% end %>
+			<% @a_id = layers[k - 1] unless k == 0 %>
+			<% @b_id = layers[k + 1] unless k == @layers.count - 1 %>
+			<% get_data = "?layer_above_id=#{@a_id}&layer_below_id=#{@b_id}" %>
+			<%= link_to "Insert layer", manga_path(@manga) + chapter_path(@chapter) + koma_path(@koma) + new_layer_path + get_data %>
 		<% end %>
+		<%= image_tag layer.picture.pic.url unless layer.picture.nil? %>
+		
 	</li>
 <% end %>
 </ul>
+<% if @correct_user %>
+	<%= link_to "Insert layer", manga_path(@manga) + chapter_path(@chapter) + koma_path(@koma) + new_layer_path %>
+<% end %>
 
 

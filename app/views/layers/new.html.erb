@@ -1,0 +1,19 @@
+<h1>New Layer</h1>
+<p><%= "For #{@manga.title}, chapter #{@chapter.title}, koma #{@koma.id}" %></p>
+<% if @correct_user %>
+	<% if @layer_before.nil? %>
+		<%= "Insert up top" %>	
+	<% elsif @layer_after.nil? %>
+		<%= "Insert down below" %>
+	<% else %>
+		<%= "Insert between layer #{@layer_before} and #{@layer_after}" %>
+	<% end %>	
+	<% form_for [@manga, @chapter, @koma, @layer], :html => { :multipart => true } do |f| %>
+		<%= f.hidden_field :layer_before, :value => @layer_before %>
+		<%= f.hidden_field:layer_after, :value => @layer_after %>
+		<%= f.label "Upload a picture" %>
+		<%= f.file_field "picture[pic]" %>
+		<%= f.submit :submit %>
+	<% end %>
+<% end %>
+
