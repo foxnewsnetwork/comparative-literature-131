@@ -1,12 +1,20 @@
-<h1><%= @manga.title %></h1>
-<p><%= @manga.summary %></p>
+<div class="hero-unit">
+	<h1><%= @manga.title %></h1>
+	<p><%= @manga.summary %></p>
+	<p><%= link_to "Reading List »", "#", :class => "btn primary large" %></p>
+</div>
+
+<div class="row">
 <% if @manga.chapters.empty? %>
-	<p>Nothing here yet! You should consider making a new chapter !</p>
+	<h2>Nothing here yet! You should consider making a new chapter !</h2>
 <% else %>
-	<ul>
-		<% @manga.chapters.each do |chapter| %>
-			<li><%= link_to "Chapter #{chapter.chapter_number}: #{chapter.title}", manga_path(@manga) + chapter_path(chapter) %></li>
-		<% end %>
-	</ul>
+	<% @manga.chapters.each do |chapter| %>
+		<div class="span6">
+			<h3><%= link_to "Chapter #{chapter.chapter_number}: #{chapter.title}", manga_path(@manga) + chapter_path(chapter) %></h3>
+			<p>Updated at: <%= chapter.updated_at %></p>
+		</div>
+	<% end %>
 <% end %>
+</div>
+
 <%= link_to "Create New Chapter!", manga_path(@manga) + new_chapter_path %>

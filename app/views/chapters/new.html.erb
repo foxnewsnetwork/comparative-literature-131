@@ -1,10 +1,16 @@
-<% if user_signed_in? %>
-	<h1><%= "New Chapter for #{@manga.title}" %></h1>
-	<% form_for( [@manga, @chapter], :html => { :multipart => true } ) do |f| %>
-		<%= f.label :title %>
-		<%= f.text_field :title %>
-		<%= f.submit :submit %>
+<div class="hero-unit">
+	<% if user_signed_in? %>
+		<h3><%= "New Chapter for #{@manga.title}" %></h3>
+		<% form_for( [@manga, @chapter], :html => { :multipart => true } ) do |f| %>
+			<p><%= f.label :title %>
+			<%= f.text_field :title %></p>
+			<p><%= f.label :chapter_number %>
+			<%= f.text_field :chapter_number %></p>
+			<p><%= f.submit :submit %></p>
+		<% end %>
+	<% else %>
+		<h1>Please sign in first buddy!</h1>
+		<p><%= link_to "Sign In »", signin_path, :class => "btn primary large" %></p>
 	<% end %>
-<% else %>
-	<p>You need to sign in order to create chapters</p>
-<% end %>
+</div>
+

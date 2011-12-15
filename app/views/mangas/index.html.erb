@@ -1,9 +1,17 @@
-<h1>Manga Index</h1>
-<%= will_paginate %>
-<ul>
+<div class="hero-unit">
+	<h1>Manga Index!</h1>
+	<p>Check out the works of others or make your own!</p>
+	<p><%= link_to "Create new manga »", new_manga_path, :class => "btn primary large" %></p>
+</div>
+<%= will_paginate @mangas %>
+
 	<% @mangas.each do |manga| %>
-		<li><%= link_to manga.title, manga %></li>
+	<div class="row">
+		<h3><%= link_to manga.title, manga %></h3>
+		<p>Manga summary goes here</p>
+	</div>
 	<% end %>
-</ul>
-<%= will_paginate %>
+
+<%= will_paginate @mangas %>
+
 

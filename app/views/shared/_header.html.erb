@@ -1,16 +1,23 @@
 <header>
 <nav>
-	<ul>
-		<li><%= link_to "Home", "/" %></li>
-		<li><%= link_to "Manga List", mangas_path %></li>
-		<li><%= link_to "Showcase", "#" %></li>
-		<% if user_signed_in? %>
+<div class="topbar">
+  <div class="fill">
+    <div class="container">
+      <a class="brand" href="/">4koma</a>
+      <ul class="nav">
+        <li class="active"><%= link_to "Home", "/" %></li>
+        <li><%= link_to "Manga List", mangas_path %></li>
+        <li><%= link_to "Showcase", "#" %></li>
+        <% if user_signed_in? %>
 			<li><%= link_to "My Dashboard", current_user %></li>
 			<li><%= link_to "Logout", destroy_user_session_path, :method => :delete %>
 		<% else %>
 			<li><%= link_to "Sign in", new_user_session_path %></li>
 			<li><%= link_to "Sign up", new_user_registration_path %></li>
 		<% end %>
-	</ul>
+      </ul>
+    </div>
+  </div>
+</div>
 </nav>
 </header>
