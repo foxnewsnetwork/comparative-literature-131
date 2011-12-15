@@ -2,7 +2,7 @@
 <p><%= "Chapter #{@chapter.chapter_number} of #{@manga.title}" %></p>
 <%= will_paginate @komas %>
 <% @komas.each do |koma| %>
-	<%= link_to "Koma test link", manga_path(@manga) + chapter_path(@chapter) + koma_path(koma) %>
+	<%= link_to "Edit koma", manga_path(@manga) + chapter_path(@chapter) + koma_path(koma) %>
 	<%= render koma, :koma => koma %>
 <% end %>
 <%= will_paginate @komas %>

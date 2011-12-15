@@ -6,6 +6,8 @@
 #  chapter_id :integer(4)
 #  created_at :datetime
 #  updated_at :datetime
+#  width      :integer(4)
+#  height     :integer(4)
 #
 
 class Koma < ActiveRecord::Base

@@ -1,10 +1,16 @@
-<% unless pictures.count == 0 %>
+<% count = pictures.count %>
+<% unless count == 0 %>
 	<% picture = pictures.first %>
-	<div style="background-image: url(<%= picture.pic.url %>);" >
-		&nbsp;
-		<% unless pictures.count == 1 %>
+	<% width = picture.width.nil? ? 450 : picture.width %><% height = picture.height.nil? ? 300 : picture.height %>
+	<ul>
+	<div style="background: url(<%= picture.pic.url %>); background-repeat: no-repeat;" >
+	<li style="width: <%= width %>px; height: <%= height %>px;" >
+		<% unless count == 1 %>
 			<% remaining_pictures = pictures[1..count-1] %>
 			<%= render "pictures/recursion", :pictures => remaining_pictures %>
+			
 		<% end %>
+	</li>
 	</div>
+	</ul>
 <% end %>

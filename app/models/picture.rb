@@ -12,6 +12,8 @@
 #  pic_content_type :string(255)
 #  pic_file_size    :integer(4)
 #  pic_updated_at   :datetime
+#  width            :integer(4)
+#  height           :integer(4)
 #
 
 class Picture < ActiveRecord::Base

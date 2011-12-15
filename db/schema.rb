@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111212190310) do
+ActiveRecord::Schema.define(:version => 20111214022024) do
 
   create_table "chapters", :force => true do |t|
     t.integer  "manga_id"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(:version => 20111212190310) do
     t.integer  "chapter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "width"
+    t.integer  "height"
   end
 
   add_index "komas", ["chapter_id"], :name => "index_komas_on_chapter_id"
@@ -83,6 +85,8 @@ ActiveRecord::Schema.define(:version => 20111212190310) do
     t.string   "pic_content_type"
     t.integer  "pic_file_size"
     t.datetime "pic_updated_at"
+    t.integer  "width"
+    t.integer  "height"
   end
 
   add_index "pictures", ["user_id"], :name => "index_pictures_on_user_id"

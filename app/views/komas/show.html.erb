@@ -1,21 +1,33 @@
 <h1>Komas#show</h1>
-<ul>
-<% for k in 0..@layers.count-1 do %>
-<% layer = @layers[k] %>
-	<li>
-		<% if @correct_user %>
-			<% @a_id = layers[k - 1] unless k == 0 %>
-			<% @b_id = layers[k + 1] unless k == @layers.count - 1 %>
-			<% get_data = "?layer_above_id=#{@a_id}&layer_below_id=#{@b_id}" %>
-			<%= link_to "Insert layer", manga_path(@manga) + chapter_path(@chapter) + koma_path(@koma) + new_layer_path + get_data %>
-		<% end %>
-		<%= image_tag layer.picture.pic.url unless layer.picture.nil? %>
-		
-	</li>
-<% end %>
-</ul>
-<% if @correct_user %>
-	<%= link_to "Insert layer", manga_path(@manga) + chapter_path(@chapter) + koma_path(@koma) + new_layer_path %>
-<% end %>
+<% if @layers.empty? %>
+	<p>Hilariously enough, there is nothing here yet!</p>
+	<%= link_to "Add a layer!" ,
+		manga_path(@manga) + chapter_path(@chapter) + koma_path(@koma) + new_layer_path if @correct_user %>	
+<% else %>
+	<ul>
+	<% for k in 0..@layers.count-1 do %>
 
+	<% layer = @layers[k] %>
+		<li>
+			<% if @correct_user %>
+			<span>
+				<% @a_id = @layers[k - 1].id unless k == 0 %>
+				<% @b_id = @layers[k].id %>
+				<%= link_to "Insert layer here", 
+					manga_path(@manga) + chapter_path(@chapter) + koma_path(@koma) + new_layer_path(:layer_above_id => @a_id, :layer_below_id => @b_id) %>
+			</span>
+			<% end %>
+			<span>
+			<%= image_tag layer.picture.pic.url unless layer.picture.nil? %>
+			</span>
+		</li>
+	<% end %>
+	</ul>
+	<% if @correct_user && @layers.count != 0 %>
+		<% @a_id = @layers.last.id %>
+		<% @b_id = nil %>
+		<%= link_to "Insert bottom-most layer", 
+			manga_path(@manga) + chapter_path(@chapter) + koma_path(@koma) + new_layer_path(:layer_above_id => @a_id, :layer_below_id => @b_id) %>
+	<% end %>
+<% end %>
 
