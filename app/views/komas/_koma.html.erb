@@ -1,6 +1,6 @@
 <% width = koma.width.nil? ? 450 : koma.width %><% height = koma.height.nil? ? 300 : koma.height %>
-<ul>
-<li style="width: <%= width %>px; height: <%= height %>px; border-style: solid;" >
+<ul style="list-style-type: none; display: inline;">
+<li style="width: <%= width %>px; height: <%= height %>px; border: 2px solid black; list-style: none" >
 	<%= render "pictures/recursion", :pictures => koma.pictures %>
 </li>
 </ul>

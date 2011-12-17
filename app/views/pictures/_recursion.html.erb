@@ -2,9 +2,9 @@
 <% unless count == 0 %>
 	<% picture = pictures.first %>
 	<% width = picture.width.nil? ? 450 : picture.width %><% height = picture.height.nil? ? 300 : picture.height %>
-	<ul>
+	<ul style="list-style-type: none; display: inline;">
 	<div style="background: url(<%= picture.pic.url %>); background-repeat: no-repeat;" >
-	<li style="width: <%= width %>px; height: <%= height %>px;" >
+	<li style="width: <%= width %>px; height: <%= height %>px; list-style-type: none;" >
 		<% unless count == 1 %>
 			<% remaining_pictures = pictures[1..count-1] %>
 			<%= render "pictures/recursion", :pictures => remaining_pictures %>

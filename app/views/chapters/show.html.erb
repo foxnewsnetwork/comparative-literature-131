@@ -1,16 +1,16 @@
-<h1><%= @chapter.title %></h1>
-<p><%= "Chapter #{@chapter.chapter_number} of #{@manga.title}" %></p>
+<div class="hero-unit">
+<h3><%= @chapter.title %></h3>
+<p><%= "Chapter #{@chapter.chapter_number} of " %><%= link_to @manga.title, manga_path(@manga) %></p>
+<% if @correct_user %>
+	<%= link_to "Add Another Koma »", manga_path(@manga) + chapter_path(@chapter) + new_koma_path, :class => "btn primary large" %>	
+<% end %>
+</div>
 <%= will_paginate @komas %>
 <% @komas.each do |koma| %>
-	<%= link_to "Edit koma", manga_path(@manga) + chapter_path(@chapter) + koma_path(koma) %>
+<div class="row">
+	<%= link_to "Edit koma »", manga_path(@manga) + chapter_path(@chapter) + koma_path(koma), :class => "btn" %>
 	<%= render koma, :koma => koma %>
+</div>
 <% end %>
 <%= will_paginate @komas %>
-<% if @correct_user %>
-	<%= link_to "Add Another Koma!", manga_path(@manga) + chapter_path(@chapter) + new_koma_path %>	
-<% else %>
-
-<% end %>
-
-<%= @komas.count %>
 

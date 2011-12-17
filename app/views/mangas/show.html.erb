@@ -1,5 +1,6 @@
 <div class="hero-unit">
 	<h1><%= @manga.title %></h1>
+	<h3>by <%= @manga.user_id %></h3>
 	<p><%= @manga.summary %></p>
 	<p><%= link_to "Reading List »", "#", :class => "btn primary large" %></p>
 </div>
@@ -9,12 +10,13 @@
 	<h2>Nothing here yet! You should consider making a new chapter !</h2>
 <% else %>
 	<% @manga.chapters.each do |chapter| %>
-		<div class="span6">
+		<div class="row">
 			<h3><%= link_to "Chapter #{chapter.chapter_number}: #{chapter.title}", manga_path(@manga) + chapter_path(chapter) %></h3>
 			<p>Updated at: <%= chapter.updated_at %></p>
 		</div>
 	<% end %>
 <% end %>
+<h3><%= link_to "Add New Chapter »", manga_path(@manga) + new_chapter_path, :class => "btn large" %></h3>
 </div>
 
-<%= link_to "Create New Chapter!", manga_path(@manga) + new_chapter_path %>
+

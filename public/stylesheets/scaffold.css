@@ -1,3 +1,10 @@
+// Custom section
+ul .koma {
+	list-style-type: none;
+}
+
+// Scaffold Section
+
 body {
 	padding-top: 60px;
 }

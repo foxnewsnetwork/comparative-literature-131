@@ -1,20 +1,55 @@
-<% if @is_correct_user %>
+<div class="hero-unit">
+<% if @correct_user %>
 	<h1>My Dashboard</h1>
-	<p>Displays the manga you're involved with</p>
-	<p>Displays the manga you're following</p>
-	<p>Displays a simple personalized feed</p>
-	<h1>My Image Collection</h1>
-	<p>UI for uploading picture</p>
-	<p>UI for folders for characters, places, and objects</p>
-	<% form_for @picture, :html => { :multipart => true } do |f| %>
-		<%= f.file_field :pic %>
-		<%= f.submit :submit %>
+	<p>[Minifeed not implemented yet]</p>
+<% else %>
+	<h1><%= @user.id %></h1>
+	<p>Check out what this faggot is doing!</p>
+	<% if user_signed_in? %>
+		<% link_to "Follow »", "#", :class => "btn primary" %>
+		<% link_to "Stalk »", "#", :class => "btn primary" %>
 	<% end %>
-	<% @existing_pics.each do |pic| %>
-		<%= image_tag(pic.pic.url, :alt => "picture", :title => "current photo") %>
-	<% end %>
-	<%= link_to "Create Manga!", new_manga_path %>
 <% end %>
-<h1>My Profile</h1>
-<p>Your public profile</p>
+</div>
+
+<div class="row">
+	<div class="span-one-third">
+		<% if @correct_user %>
+			<h3>My Manga</h3>
+			<p><%= link_to "New Manga »", new_manga_path, :class => "btn" %></p>
+		<% else %>
+			<h3>This faggot's mangas</h3>
+		<% end %>
+		<ul>
+			<% @user.mangas.each do |manga| %>
+				<li><%= link_to manga.title, manga_path(manga) %></li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="span-one-third">
+		<% if @correct_user %>
+			<h3>My Stock</h3>
+			<p>Remember: PNGs only!!</p>
+			<% form_for  @picture, :html => { :multipart => true } do |f| %>
+				<%= f.file_field :pic %>
+				<%= f.submit "New picture »" %> 
+			<% end %>
+		<% else %>
+			<h3>This faggot's pictures</h3>
+		<% end %>
+		<ul>
+		<% @user.pictures.each do |picture| %>
+			<li><%= image_tag picture.pic.url, :size => "150x150" %></li>
+		<% end %>
+		</ul>
+	</div>
+	<div class="span-one-third">
+		<% if @correct_user %>
+			<h3>My activities</h3>
+		<% else %>
+			<h3>This faggot's activities</h3>
+		<% end %>
+		<p>[Not implemented yet!!]</p>
+	</div>
+</div>
 
