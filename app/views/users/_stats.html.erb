@@ -1,0 +1,10 @@
+<ul style="list-style: none; display: inline-block;">
+	<li><%= link_to "Following: ", following_user_path(user) %><%= user.following.count %></li>
+	<li><%= link_to "Followers: ", followers_user_path(user) %><%= user.followers.count %></li>
+	<% if current_user.id == user.id %>
+		<li><%= link_to "Stalking: ", stalking_user_path(user) %><%= user.stalking.count %></li>
+	<% else %>
+		<li>Stalking: ??</li>
+	<% end %>
+	<li>Stalkers: <%= user.stalkers.count %></li>
+</ul>

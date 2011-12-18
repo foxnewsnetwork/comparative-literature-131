@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111214022024) do
+ActiveRecord::Schema.define(:version => 20111218020855) do
 
   create_table "chapters", :force => true do |t|
     t.integer  "manga_id"
@@ -75,6 +75,17 @@ ActiveRecord::Schema.define(:version => 20111214022024) do
 
   add_index "mangas", ["user_id"], :name => "index_mangas_on_user_id"
 
+  create_table "obsessions", :force => true do |t|
+    t.integer  "stalker_id"
+    t.integer  "stalked_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "obsessions", ["stalked_id"], :name => "index_obsessions_on_stalked_id"
+  add_index "obsessions", ["stalker_id", "stalked_id"], :name => "index_obsessions_on_stalker_id_and_stalked_id", :unique => true
+  add_index "obsessions", ["stalker_id"], :name => "index_obsessions_on_stalker_id"
+
   create_table "pictures", :force => true do |t|
     t.integer  "user_id"
     t.string   "usage"
@@ -91,6 +102,17 @@ ActiveRecord::Schema.define(:version => 20111214022024) do
 
   add_index "pictures", ["user_id"], :name => "index_pictures_on_user_id"
 
+  create_table "relationships", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
+  add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
+  add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
+
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
     t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
@@ -104,9 +126,12 @@ ActiveRecord::Schema.define(:version => 20111214022024) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.integer  "user_level",                            :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["name"], :name => "index_users_on_name", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

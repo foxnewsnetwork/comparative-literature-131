@@ -1,0 +1,2 @@
+module ObsessionsHelper
+end

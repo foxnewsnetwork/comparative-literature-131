@@ -1,0 +1,31 @@
+<div class="hero-unit">
+	<h1><%= @title %></h1>
+	<% if @title == "Stalking" %>
+		<% if @correct_user %>
+			<p>You are stalking <%= pluralize( @users.count, "person") %></p>
+		<% else %>
+			<p><%= @user.name %> is stalking some (possibly 0) number of users</p>
+		<% end %>
+	<% else  %>
+		<p><%= @user.name %> has <%= pluralize(@users.count, "stalker") %></p>
+	<% end %>
+</div>
+
+<div class="row">
+	<ul>
+	<% if @correct_user && @title == "Stalking" %>
+	<%= will_paginate @users %>
+	<% @users.each do |user| %>
+		<li>
+			<%= link_to user.name, user %>
+			<%= form_for current_user.obsessions.find_by_stalked_id(user), :html => { :method => :delete }, :remote => true do |f| %>
+				<%= f.submit "Unstalk »", :class => "btn" %>
+			<% end %>
+		</li>
+	<% end %>
+	<%= will_paginate @users %>
+	<% else %>
+		<p>Sorry buddy, your stalkers (if you have any) are too good at avoiding detection.</p>
+	<% end %>	
+	</ul>
+</div>

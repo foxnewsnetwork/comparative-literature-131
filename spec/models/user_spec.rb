@@ -15,6 +15,8 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  name                   :string(255)
+#  user_level             :integer(4)      default(0)
 #
 
 require 'spec_helper'

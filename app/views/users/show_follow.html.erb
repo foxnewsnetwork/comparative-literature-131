@@ -1,0 +1,21 @@
+<div class="hero-unit">
+	<h2><%= "#{@user.name}'s #{@title}" %></h2>
+	<p>You have <%= @users.count %> people in your <%= @title %> group!</p>
+</div>
+
+<div class="row">
+	<ul>
+	<%= will_paginate @users %>
+	<% @users.each do |user| %>
+		<li>
+			<%= link_to user.name, user %>
+			<% if @correct_user && @title == "Following" %>
+				<%= form_for current_user.relationships.find_by_followed_id(@user), :html => { :method => :delete }, :remote => true do |f| %>
+					<%= f.submit "Unfollow »", :class => "btn" %>
+				<% end %>
+			<% end %>
+		</li>
+	<% end %>
+	<%= will_paginate @users %>
+	</ul>
+</div>

@@ -3,13 +3,32 @@
 	<h1>My Dashboard</h1>
 	<p>[Minifeed not implemented yet]</p>
 <% else %>
-	<h1><%= @user.id %></h1>
+	<h1><%= @user.name %></h1>
 	<p>Check out what this faggot is doing!</p>
 	<% if user_signed_in? %>
-		<% link_to "Follow »", "#", :class => "btn primary" %>
-		<% link_to "Stalk »", "#", :class => "btn primary" %>
+		<% unless current_user.following?(@user) %>
+			<%= form_for current_user.relationships.build(:followed_id => @user.id), :remote => true do |f| %>
+				<%= f.hidden_field :followed_id %>
+				<%= f.submit "Follow »", :class => "btn primary" %>
+			<% end %>
+		<% else %>
+			<%= form_for current_user.relationships.find_by_followed_id(@user), :html => { :method => :delete }, :remote => true do |f| %>
+				<%= f.submit "Unfollow »", :class => "btn" %>
+			<% end %>
+		<% end %>
+		<% unless current_user.stalking?(@user) %>
+			<%= form_for current_user.obsessions.build(:stalked_id => @user.id), :remote => true do |f| %>
+				<%= f.hidden_field :stalked_id %>
+				<%= f.submit "Stalk »", :class => "btn primary" %>
+			<% end %>
+		<% else %>
+			<%= form_for current_user.obsessions.find_by_stalked_id(@user), :html => { :method => :delete }, :remote => true do |f| %>
+				<%= f.submit "Unstalk »", :class => "btn" %>
+			<% end %>
+		<% end %>
 	<% end %>
 <% end %>
+	<%= render "users/stats", :user => @user %>
 </div>
 
 <div class="row">
